@@ -1,0 +1,30 @@
+{
+  "name": "AppSec",
+  "version": "1.0.0",
+  "description": "AppSec",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js ",
+    "dev": "nodemon app.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zonbimutin/AppSec.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zonbimutin/AppSec/issues"
+  },
+  "homepage": "https://github.com/zonbimutin/AppSec#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
+}
