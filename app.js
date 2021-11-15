@@ -4,6 +4,8 @@ const morgan = require('morgan')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 
+// get config vars
+dotenv.config()
 
 const mainRouter = require("./routes/main");
 const authRouter = require("./routes/auth");
