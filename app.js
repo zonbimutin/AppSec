@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken')
 const cors = require('cors')
 
 
+const mainRouter = require("./routes/main");
+
+
 const app = express()
 const port = 3000
 
@@ -13,9 +16,7 @@ dotenv.config()
 app.use(cors())
 app.use(morgan('combined'))
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.use("/", mainRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
