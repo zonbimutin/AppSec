@@ -75,11 +75,7 @@ User.findById = (id, result) => {
 };
 
 User.getAll = (username, result) => {
-    let query = "SELECT * FROM users";
-
-    if (username) {
-        query += ` WHERE username LIKE '%${username}%'`;
-    }
+    let query = "SELECT u.id, u.username, u.createAt, r.label, r.can_read, r.can_delete, r.can_write, r.can_update from users u, roles r WHERE u.role = r.id ";
 
     sql.query(query, (err, res) => {
         if (err) {
@@ -88,7 +84,7 @@ User.getAll = (username, result) => {
             return;
         }
 
-        console.log("tutorials: ", res);
+        console.log(res)
         result(null, res);
     });
 };

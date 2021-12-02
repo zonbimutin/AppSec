@@ -9,6 +9,7 @@ dotenv.config()
 
 const mainRouter = require("./routes/main");
 const authRouter = require("./routes/auth");
+const blogRouter = require("./routes/blog")
 
 
 const app = express()
@@ -24,7 +25,7 @@ dotenv.config()
 
 
 app.use("/", mainRouter);
-app.use("/auth/", authRouter);
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
