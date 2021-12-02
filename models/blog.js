@@ -7,7 +7,7 @@ const Blog = function(blog) {
 };
 
 Blog.create = (title, content, user_id, result) => {
-    sql.query(`INSERT INTO blogs (title, content, user_id) VALUE (?, ?, ?)`, [
+    sql(`INSERT INTO blogs (title, content, user_id) VALUE (?, ?, ?)`, [
         title, content, user_id
     ], (err, res) => {
         if (err) {
@@ -19,8 +19,21 @@ Blog.create = (title, content, user_id, result) => {
     })
 }
 
+Blog.delete = (id, result) => {
+    sql(`DELETE FROM blogs WHERE id = ?`, [
+        id
+    ], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        result(null, true);
+    })
+}
+
 Blog.findById = (id, result) => {
-    sql.query(`SELECT * FROM blogs WHERE id = ?`, [
+    sql(`SELECT * FROM blogs WHERE id = ?`, [
         id
     ], (err, res) => {
         if (err) {
@@ -49,7 +62,7 @@ Blog.getAll = (user_id, result) => {
         value.push(user_id);
     }
 
-    sql.query(query, value, (err, res) => {
+    sql(query, value, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);

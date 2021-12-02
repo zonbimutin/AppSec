@@ -16,8 +16,9 @@ router.get("/users/me", userController.findAll);
 router.post("/users/create", userController.create);
 router.post("/login", userController.login);
 
-router.get("/blog", authenticateToken ,userController.login);
-router.get("/blog/create", blogController.create);
+router.get("/blog", authenticateToken ,blogController.read);
+router.post("/blog", authenticateToken, blogController.create);
+router.delete("/blog", authenticateToken, blogController.delete);
 
 
 module.exports = router;
