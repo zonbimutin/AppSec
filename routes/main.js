@@ -13,4 +13,6 @@ const {
 
 router.get("/test", test);
 router.get("/users", userController.findAll);
+router.get("/users/create", userController.create);
+router.get("/login", userController.login);
 module.exports = router;
