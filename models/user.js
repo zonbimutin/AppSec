@@ -17,7 +17,7 @@ const User = function(user) {
 User.create = (username, password, result) => {
     
     bcrypt.hash(password, saltRounds, async function(err, hash) {
-        sql.query(`INSERT INTO users (username, password) VALUES ? , ?)`, [username, hash], (err, res) => {
+        sql(`INSERT INTO users (username, password) VALUES (?, ?)`, [username, hash], (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -49,7 +49,7 @@ User.findById = async (id) => {
 User.getAll = (username, result) => {
     let query = "SELECT u.id, u.username, u.createAt, r.label, r.can_read, r.can_delete, r.can_write, r.can_update from users u, roles r WHERE u.role = r.id ";
 
-    sql.query(query, (err, res) => {
+    sql(query, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);

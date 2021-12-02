@@ -77,7 +77,8 @@ exports.findById = async (req, res) => {
 }
 
 exports.create = (req, res) => {
-    User.create('test', 'test', (err, data) => {
+    var {username, password} = req.body;
+    User.create(username, password, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
