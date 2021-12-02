@@ -4,6 +4,7 @@ const router = express.Router();
 const { authenticateToken } = require("../middlewares/jwt");
 
 const userController = require('../controllers/user');
+const blogController = require('../controllers/blog');
 
 const {
     test,
@@ -16,6 +17,7 @@ router.get("/users/create", userController.create);
 router.get("/login", userController.login);
 
 router.get("/blog", authenticateToken ,userController.login);
+router.get("/blog/create", blogController.create);
 
 
 module.exports = router;
