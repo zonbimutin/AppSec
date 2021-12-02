@@ -2,8 +2,11 @@ const sql = require("../services/db.js");
 
 // constructor
 const Blog = function(blog) {
+    this.id = blog.id
+    this.user_id = blog.user_id
     this.title = blog.title;
     this.content = blog.content;
+    this.createAt = blog.createAt;
 };
 
 Blog.create = (title, content, user_id, result) => {
@@ -32,25 +35,20 @@ Blog.delete = (id, result) => {
     })
 }
 
-Blog.findById = (id, result) => {
-    sql(`SELECT * FROM blogs WHERE id = ?`, [
-        id
-    ], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
+Blog.findById = async (id) => {
 
-        if (res.length) {
-            console.log("found blogs: ", res[0]);
-            result(null, res[0]);
-            return;
-        }
+    let query = `SELECT * FROM blogs WHERE id = ?`
+    try {
+        const res = await sql( query, [id] );
+        if(res.lenght < 1) throw new Error('')
+        let blog = new Blog(res[0])
+        return blog
+    }
+    catch (er){
+        console.log(er)
+        return null
+    }
 
-        // not found Tutorial with the id
-        result({ kind: "not_found" }, null);
-    });
 };
 
 Blog.getAll = (user_id, result) => {
@@ -72,6 +70,21 @@ Blog.getAll = (user_id, result) => {
         console.log("blogs: ", res);
         result(null, res);
     });
+};
+
+Blog.update = async (blog) => {
+
+    let query = `UPDATE blogs SET title=?, content=?, user_id=? WHERE blogs.id = ?`
+
+    try{
+        const res = await sql( query, [blog.title, blog.content, blog.user_id, blog.id] );
+        return res[0]
+    }
+    catch (er) {
+        console.log(er)
+        return null
+    }
+
 };
 
 module.exports = Blog;

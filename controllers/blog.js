@@ -41,3 +41,26 @@ exports.read = (req, res) => {
     })
 }
 
+
+
+exports.update = async (req, res) => {
+    let user = req.user
+    if(!user) return
+    if(user.role.can_update){
+        try {
+            let blogUpdate = req.body
+            let blog = await Blog.findById(blogUpdate.id)
+            console.log(blog)
+            if(!blog)  return
+
+            let blogres = await Blog.update({...blog, ...blogUpdate})
+            res.send(blogres)
+        }
+        catch (er) {
+            console.log(er)
+        }
+
+
+    }
+
+}

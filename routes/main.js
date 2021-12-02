@@ -19,6 +19,7 @@ router.post("/login", userController.login);
 router.get("/blog", authenticateToken ,blogController.read);
 router.post("/blog", authenticateToken, blogController.create);
 router.delete("/blog", authenticateToken, blogController.delete);
+router.put("/blog",authenticateToken, blogController.update);
 
 
 module.exports = router;
