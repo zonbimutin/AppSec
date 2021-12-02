@@ -11,10 +11,10 @@ const {
 } = require("../controllers/main");
 
 
-
 router.get("/users", userController.findAll);
-router.get("/users/create", userController.create);
-router.get("/login", userController.login);
+router.get("/users/me", userController.findAll);
+router.post("/users/create", userController.create);
+router.post("/login", userController.login);
 
 router.get("/blog", authenticateToken ,userController.login);
 router.get("/blog/create", blogController.create);

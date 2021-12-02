@@ -10,24 +10,10 @@ const Role = function(role) {
     this.can_delete = role.can_delete;
 };
 
-Role.findById = (id, result) => {
-    sql.query(`SELECT * FROM roles WHERE id = ?`, [
-        id
-    ], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
-
-        if (res.length) {
-            result(null, res[0]);
-            return;
-        }
-
-        // not found Tutorial with the id
-        result({ kind: "not_found" }, null);
-    });
+Role.findById = async (id) => {
+    let query = `SELECT * FROM roles WHERE id = ${id}`
+    const res = await sql( query )
+    return res[0]
 };
 
 module.exports = Role;

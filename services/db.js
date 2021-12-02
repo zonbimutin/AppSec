@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const util = require('util');
 const config = require('../db.config.js');
 
 // Create a connection to the database
@@ -16,4 +17,7 @@ connection.connect(error => {
     console.log("Successfully connected to the database.");
 });
 
-module.exports = connection;
+// node native promisify
+const query = util.promisify(connection.query).bind(connection);
+
+module.exports = query;
